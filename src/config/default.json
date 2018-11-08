@@ -1,0 +1,23 @@
+{
+    "AppInfo": {
+        "Env": "local",
+        "Addr": ":3000"
+    },
+    "Log": {
+        "LogBasePath": "path",
+        "LogFileName": "file name"
+    },
+    "DB": {
+        "DriverName": "mongodb",
+        "Host": "127.0.0.1",
+        "Port": "27017",
+        "DBName": "<db-name>"
+    },
+    "Redis": {
+        "Host": "127.0.0.1",
+        "Port": "6379"
+    },
+    "Security": {
+        "Secret": "<secret>"
+    }
+}

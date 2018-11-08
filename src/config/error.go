@@ -1,0 +1,17 @@
+package config
+
+import "errors"
+
+const (
+	// error
+	ErrorMsgParamWrong = "param wrong"
+)
+
+var (
+	// error
+	ErrorOutOfRange    = errors.New("out of range")
+	ErrorIDFormatWrong = errors.New("id format is wrong")
+	ErrorNotFound      = errors.New("not found")
+	ErrorHasExist      = errors.New("has exist")
+	ErrorParamWrong    = errors.New("param is wrong")
+)

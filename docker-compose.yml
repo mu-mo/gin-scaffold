@@ -1,0 +1,61 @@
+version: '3'
+
+services:
+  api:
+    image: host/<group>/<project-name>-prod:1.0.0
+    environment:
+      - TZ=Asia/Shanghai
+      - ENV=prod
+      - CONFIG_PATH_PREFIX=/app/config/
+
+      - MONGO_INITDB_ROOT_USERNAME=<user name>
+      - MONGO_INITDB_ROOT_PASSWORD=<password>
+      - MONGO_INITDB_DATABASE=<db name>
+
+      - RedisPass=<password>
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./config:/app/config
+      - ./log:/app/log
+    ports:
+      - "6540:3000"
+    depends_on:
+      - redis
+      - mongo
+    container_name: <project-name>-api
+    entrypoint: bin/main
+    logging:
+      driver: gelf
+      options:
+        gelf-address: '<log center>'
+        tag: <project-name>
+  mongo:
+    image: mongo:3.6.3
+    expose:
+      - "27017"
+    ports:
+      - "49255:27017"
+    volumes:
+      - ./data/mongo:/data/db
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - TZ=Asia/Shanghai
+      - MONGO_INITDB_ROOT_USERNAME=<user name>
+      - MONGO_INITDB_ROOT_PASSWORD=<password>
+      - MONGO_INITDB_DATABASE=<db name>
+    container_name: <project-name>-mongo
+  redis:
+    image: redis:4.0.8
+    expose:
+      - "6379"
+    ports:
+      - "49256:6379"
+    environment:
+      - TZ=Asia/Shanghai
+      - RedisPass=<password>
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./data/redis:/data
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+    command: [ "redis-server", "/usr/local/etc/redis/redis.conf" ]
+    container_name: <project-name>-redis

@@ -1,0 +1,15 @@
+{
+    "AppInfo": {
+        "Env": "dev"
+    },
+    "DB": {
+        "Host": "mongo",
+        "User": "user name",
+        "PW": "pw",
+        "AdminDBName": "admin"
+    },
+    "Redis": {
+        "Host": "redis",
+        "PW": "pw"
+    }
+}
